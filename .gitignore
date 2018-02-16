@@ -62,7 +62,8 @@ coverage
 .DS_Store
 *.log
 .vscode
-.idea
+.idea/
+
 dist
 compiled
 .awcache
