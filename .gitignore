@@ -57,12 +57,16 @@ typings/
 # dotenv environment variables file
 .env
 
+.idea
+.idea/
+
 coverage
 .nyc_output
 .DS_Store
 *.log
 .vscode
-.idea/
+
+
 
 dist
 compiled
