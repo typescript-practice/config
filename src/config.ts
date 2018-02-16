@@ -48,7 +48,6 @@ export default class Config {
     return (rtnVal !== null ? rtnVal : fallbackValue);
   }
 
-
   /**
    * @name getBoolean
    * @description
@@ -72,7 +71,6 @@ export default class Config {
     return !!val;
   }
 
-
   /**
    * @name getNumber
    * @description
@@ -89,7 +87,6 @@ export default class Config {
     const val = parseFloat(this.get(key));
     return isNaN(val) ? fallbackValue : val;
   }
-
 
   /**
    * @name set
