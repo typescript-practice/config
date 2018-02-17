@@ -2,7 +2,7 @@
   "name": "tp-config",
   "version": "1.0.0",
   "description": "Used to get the application configuration",
-  "keywords": [],
+  "keywords": ["config", "application configuration"],
   "main": "dist/config.umd.js",
   "module": "dist/config.es5.js",
   "typings": "dist/types/config.d.ts",
