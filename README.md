@@ -40,10 +40,13 @@ Returns a single config value, given a key.
 
 ```js
 let config = new Config({
-   name: "Doc Brown",
-   occupation: "Weather Man"
+  testNum: 2,
+  testFn: function (this: Config) {
+    return `testFnReturnValue+${this.get("testNum")}`;
+  }
 });
-expect(config.get("name")).toEqual("Doc Brown");
+expect(config.get("testNum")).toEqual(2);
+expect(config.get("testFn")).toEqual("testFnReturnValue+2");
 ```
 
 ### config.getBoolean(key, fallbackValue)
@@ -83,12 +86,32 @@ Sets a single config value.
 * `@param {string} [key]` - The key used to look up the value at a later point in time.
 * `@param {string} [value]` - The config value being stored.
 
+```js
+let config = new Config(null);
+config.set("name", "Doc Brown");
+config.set("occupation", "Weather Man");
+
+expect(config.get("name")).toEqual("Doc Brown");
+expect(config.get("occupation")).toEqual("Weather Man");
+```
+
 ### config.settings()
 
 Get  all configs.
 
 * `@return {object}` - Return all configs.
 
+```js
+let config = new Config({
+  name: "Doc Brown",
+  occupation: "Weather Man"
+});
+
+expect(config.settings()).toEqual({
+  name: "Doc Brown",
+  occupation: "Weather Man"
+});
+```
 
 ### config.settings(configs)
 
@@ -96,6 +119,17 @@ Set(reset) all configs.
 
 * `@param {object} [configs]` - The configs object will be reset
 * `@return {object} this` - Return this value
+
+```js
+let config = new Config();
+config.settings({
+  name: "Doc Brown",
+  occupation: "Weather Man"
+});
+
+expect(config.get("name")).toEqual("Doc Brown");
+expect(config.get("occupation")).toEqual("Weather Man");
+```
 
 ## Development
 
