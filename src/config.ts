@@ -1,9 +1,9 @@
-"use strict";
+'use strict'
 
-const isFunction = (val: any) => typeof val === "function";
-const isUndefined = (val: any) => typeof val === "undefined";
-const isObject = (val: any) => typeof val === "object";
-const isArray = Array.isArray;
+const isFunction = (val: any) => typeof val === 'function'
+const isUndefined = (val: any) => typeof val === 'undefined'
+const isObject = (val: any) => typeof val === 'object'
+const isArray = Array.isArray
 
 /**
  * @name Config
@@ -11,11 +11,11 @@ const isArray = Array.isArray;
  * The Config lets you configure your entire app.
  */
 export default class Config {
-  private _c: any = {}; // catch
-  private _s: any = {}; // setting
+  private _c: any = {} // catch
+  private _s: any = {} // setting
 
   constructor(config?: any) {
-    this._s = config && isObject(config) && !isArray(config) ? config : {};
+    this._s = config && isObject(config) && !isArray(config) ? config : {}
   }
 
   /**
@@ -27,25 +27,26 @@ export default class Config {
    * @param {any} [fallbackValue] - a fallback value to use when the config
    * value was not found, or is config value is `null`. Fallback value
    *  defaults to `null`.
+   *  @return {any}
    */
   get(key?: string, fallbackValue: any = null): any {
     if (isUndefined(key)) {
-      throw new Error("[config:get()] config key is not defined");
+      throw new Error('[config:get()] config key is not defined')
     }
 
     if (isUndefined(this._c[key as string])) {
-      let userDefaultValue: any = this._s[key as string];
+      let userDefaultValue: any = this._s[key as string]
 
       // cache the value
-      this._c[key as string] = isUndefined(userDefaultValue) ? null : userDefaultValue;
+      this._c[key as string] = isUndefined(userDefaultValue) ? null : userDefaultValue
     }
 
-    let rtnVal: any = this._c[key as string];
+    let rtnVal: any = this._c[key as string]
     if (isFunction(rtnVal)) {
-      rtnVal = rtnVal.call(this, this);
+      rtnVal = rtnVal.call(this, this)
     }
 
-    return (rtnVal !== null ? rtnVal : fallbackValue);
+    return rtnVal !== null ? rtnVal : fallbackValue
   }
 
   /**
@@ -59,16 +60,17 @@ export default class Config {
    * @param {string} [key] - the key for the config value
    * @param {boolean} [fallbackValue] - a fallback value to use when the config
    * value was `null`. Fallback value defaults to `false`.
+   * @return {boolean}
    */
   getBoolean(key: string, fallbackValue: boolean = false): boolean {
-    const val = this.get(key);
+    const val = this.get(key)
     if (val === null) {
-      return fallbackValue;
+      return fallbackValue
     }
-    if (typeof val === "string") {
-      return val === "true";
+    if (typeof val === 'string') {
+      return val === 'true'
     }
-    return !!val;
+    return !!val
   }
 
   /**
@@ -82,10 +84,11 @@ export default class Config {
    * @param {string} [key] - the key for the config value
    * @param {number} [fallbackValue] - a fallback value to use when the config
    * value turned out to be `NaN`. Fallback value defaults to `NaN`.
+   * @return {number}
    */
   getNumber(key: string, fallbackValue: number = NaN): number {
-    const val = parseFloat(this.get(key));
-    return isNaN(val) ? fallbackValue : val;
+    const val = parseFloat(this.get(key))
+    return isNaN(val) ? fallbackValue : val
   }
 
   /**
@@ -98,11 +101,11 @@ export default class Config {
    */
   set(key?: string, value?: string) {
     if (isUndefined(key) || isUndefined(value)) {
-      throw new Error("[config:set()] key or value is not defined");
+      throw new Error('[config:set()] key or value is not defined')
     }
-    this._s[key as string] = value;
-    delete this._c[key as string]; // clear cache
-    return this;
+    this._s[key as string] = value
+    delete this._c[key as string] // clear cache
+    return this
   }
 
   /**
@@ -113,14 +116,14 @@ export default class Config {
   settings(...args: Object[]) {
     switch (args.length) {
       case 0:
-        return this._s;
+        return this._s
       case 1:
         // settings({...})
-        this._s = args[0];
-        this._c = {}; // clear cache
-        break;
+        this._s = args[0]
+        this._c = {} // clear cache
+        break
     }
 
-    return this;
+    return this
   }
 }
