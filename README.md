@@ -31,7 +31,7 @@ config.get('testKey') === 'testValue'; // true
 
 ## API
 
-### config.get(key, fallbackValue)
+### ```config.get(key, fallbackValue)```
 Returns a single config value, given a key. 
 
 * `@param {string} [key]` - the key for the config value
@@ -49,7 +49,7 @@ expect(config.get("testNum")).toEqual(2);
 expect(config.get("testFn")).toEqual("testFnReturnValue+2");
 ```
 
-### config.getBoolean(key, fallbackValue)
+### ```config.getBoolean(key, fallbackValue)```
 
 Same as `get()`, however always returns a boolean value. If the value from `get()` is `null`, then it'll return the `fallbackValue` which defaults to `false`. Otherwise, `getBoolean()` will return  if the config value is truthy or not. It also returns `true` if the config value was the string value `"true"`.
 
@@ -65,7 +65,7 @@ expect(config.getBoolean("key1")).toEqual(true);
 expect(config.getBoolean("key2")).toEqual(false);
 ```
 
-### config.getNumber(key, fallbackValue)
+### ```config.getNumber(key, fallbackValue)```
 
 Same as `get()`, however always returns a number value. Uses `parseFloat()` on the value received from `get()`. If the result from the parse is `NaN`, then it will return the value passed to `fallbackValue`. If no fallback value was provided then it'll default to returning `NaN` when the result is not a valid number.
 
@@ -79,7 +79,7 @@ let config = new Config({
 expect(config.getNumber("key")).toEqual(6);
 ```
 
-### config.set(key, value)
+### ```config.set(key, value)```
 
 Sets a single config value.
 
@@ -95,7 +95,7 @@ expect(config.get("name")).toEqual("Doc Brown");
 expect(config.get("occupation")).toEqual("Weather Man");
 ```
 
-### config.settings()
+### ```config.settings()```
 
 Get  all configs.
 
@@ -113,7 +113,7 @@ expect(config.settings()).toEqual({
 });
 ```
 
-### config.settings(configs)
+### ```config.settings(configs)```
 
 Set(reset) all configs.
 
